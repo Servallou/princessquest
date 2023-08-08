@@ -12,4 +12,6 @@ typedef struct game_s {
 
 } game_t;
 
+void movePlayer(mob_t *princess);
+
 #endif /* !MAIN_H_ */

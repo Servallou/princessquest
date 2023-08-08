@@ -8,6 +8,7 @@
 CC	=	gcc
 
 SRC_MAIN	=	src/main.c	\
+				src/movePlayer.c	\
 
 NAME_MAIN	=	princessdev0.0.0
 

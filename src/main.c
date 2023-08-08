@@ -51,6 +51,10 @@ int main(void)
                 sfRenderWindow_close(game.window);
             }
         }
+        movePlayer();
+        if (sfKeyboard_isKeyPressed(sfKeyEscape)) {
+            break;
+        }
         sfRenderWindow_clear(game.window, sfBlack);
         sfRenderWindow_drawSprite(game.window, princess.sprite, NULL);
         sfRenderWindow_display(game.window);
