@@ -36,8 +36,9 @@ int main(void)
         "princess",
         1.0,
         sfMusic_createFromFile("./resources/audio/test.ogg"),
-        1.0,
-        PLAYER
+        0.3,
+        PLAYER,
+        (sfVector2f){0, 0}
     };
     sfSprite_setScale(princess.sprite, (sfVector2f){5, 5});
     sfSprite_setTexture(princess.sprite, princess.texture, sfTrue);
@@ -51,12 +52,11 @@ int main(void)
                 sfRenderWindow_close(game.window);
             }
         }
-        movePlayer();
         if (sfKeyboard_isKeyPressed(sfKeyEscape)) {
             break;
         }
         sfRenderWindow_clear(game.window, sfBlack);
-        sfRenderWindow_drawSprite(game.window, princess.sprite, NULL);
+        movePlayer(&princess, game.window);
         sfRenderWindow_display(game.window);
     }
     destroy_game(&game);

@@ -20,6 +20,7 @@ typedef struct mob_s {
     sfMusic *hitSound;
     float speedMove;
     int id;
+    sfVector2f pos;
 } mob_t;
 
 #endif /* !MOB_H_ */
