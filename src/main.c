@@ -1,5 +1,27 @@
 #include "main.h"
 
+static struct keyLang_s changeLay(char lang)
+{
+    struct keyLang_s tmp;
+
+    if (lang == 'e') {
+        tmp = (struct keyLang_s){
+            sfKeyW,
+            sfKeyA,
+            sfKeyS,
+            sfKeyD
+        };
+    } else {
+        tmp = (struct keyLang_s){
+            sfKeyZ,
+            sfKeyQ,
+            sfKeyS,
+            sfKeyD
+        };
+    }
+    return tmp;
+}
+
 static void init_game(game_t *game)
 {
     sfVideoMode mode = {1280, 720, 32};
@@ -28,6 +50,12 @@ int main(void)
 {
     sfEvent event;
     game_t game;
+    struct keyLang_s keyLang;
+    char lang = 'e';
+    sfFont *font = sfFont_createFromFile("./resources/font/arial.ttf");
+    sfText *text = sfText_create();
+    sfText_setFont(text, font);
+    sfText_setPosition(text, (sfVector2f){10, 10});
     const sfIntRect area = {0, 0, 60, 60};
     mob_t princess = {
         sfSprite_create(),
@@ -36,7 +64,7 @@ int main(void)
         "princess",
         1.0,
         sfMusic_createFromFile("./resources/audio/test.ogg"),
-        0.3,
+        1.5,
         PLAYER,
         (sfVector2f){0, 0}
     };
@@ -52,12 +80,22 @@ int main(void)
                 sfRenderWindow_close(game.window);
             }
         }
+        if (sfKeyboard_isKeyPressed(sfKeyP)) {
+            lang = 'f';
+            sfText_setString(text, "Fr");
+        }
+        if (sfKeyboard_isKeyPressed(sfKeyP) && lang == 'f') {
+            lang = 'e';
+            sfText_setString(text, "En");
+        }
+        keyLang = changeLay(lang);
         if (sfKeyboard_isKeyPressed(sfKeyEscape)) {
             break;
         }
-        sfRenderWindow_clear(game.window, sfBlack);
-        movePlayer(&princess, game.window);
+        movePlayer(&princess, game.window, keyLang);
+        sfRenderWindow_drawText(game.window, text, NULL);
         sfRenderWindow_display(game.window);
+        sfRenderWindow_clear(game.window, sfBlack);
     }
     destroy_game(&game);
     destroy_mob(&princess);

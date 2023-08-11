@@ -1,23 +1,23 @@
 #include "main.h"
 
-extern void movePlayer(mob_t *princess, sfRenderWindow *window)
+extern void movePlayer(mob_t *princess, sfRenderWindow *window, struct keyLang_s keyLang)
 {
-    if (sfKeyboard_isKeyPressed(sfKeyW)) {
+    if (sfKeyboard_isKeyPressed(keyLang.w)) {
         printf("W %d\n", sfKeyW);
-        princess->pos.y += princess->speedMove;
+        princess->pos.y -= princess->speedMove;
         sfSprite_setPosition(princess->sprite, (sfVector2f){princess->pos.x, princess->pos.y});
     }
-    if (sfKeyboard_isKeyPressed(sfKeyA)) {
+    if (sfKeyboard_isKeyPressed(keyLang.a)) {
         printf("A %d\n", sfKeyA);
         princess->pos.x -= princess->speedMove;
         sfSprite_setPosition(princess->sprite, (sfVector2f){princess->pos.x, princess->pos.y});
     }
-    if (sfKeyboard_isKeyPressed(sfKeyS)) {
+    if (sfKeyboard_isKeyPressed(keyLang.s)) {
         printf("S %d\n", sfKeyS);
-        princess->pos.y -= princess->speedMove;
+        princess->pos.y += princess->speedMove;
         sfSprite_setPosition(princess->sprite, (sfVector2f){princess->pos.x, princess->pos.y});
     }
-    if (sfKeyboard_isKeyPressed(sfKeyD)) {
+    if (sfKeyboard_isKeyPressed(keyLang.d)) {
         printf("D %d\n", sfKeyD);
         princess->pos.x += princess->speedMove;
         sfSprite_setPosition(princess->sprite, (sfVector2f){princess->pos.x, princess->pos.y});

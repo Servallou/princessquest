@@ -12,6 +12,13 @@ typedef struct game_s {
 
 } game_t;
 
-void movePlayer(mob_t *princess, sfRenderWindow *window);
+struct keyLang_s {
+    int w;
+    int a;
+    int s;
+    int d;
+};
+
+void movePlayer(mob_t *princess, sfRenderWindow *window, struct keyLang_s);
 
 #endif /* !MAIN_H_ */
