@@ -6,6 +6,9 @@
     #include <stdio.h>
     #include "mob.h"
 
+    #define WIDTH 1920
+    #define HEIGHT 1080
+
 typedef struct game_s {
     sfRenderWindow *window;
     sfMusic *music;
