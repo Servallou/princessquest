@@ -1,6 +1,21 @@
 #include "main.h"
 
-extern void movePlayer(mob_t *princess, sfRenderWindow *window, struct keyLang_s keyLang)
+static void princess_LeftWalk(mob_t *princess, sfIntRect rect, sfClock *clock)
+{
+    rect.top = 346;
+    rect.height = 64;
+    if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) > 0.10f) {
+        if (rect.left == 471) {
+            rect.left = 23;
+        } else {
+            rect.left += 64;
+        }
+        sfSprite_setTextureRect(princess->sprite, rect);
+        sfClock_restart(clock);
+    }
+}
+
+extern void movePlayer(mob_t *princess, game_t *game, struct keyLang_s keyLang)
 {
     sfIntRect princess_downRect = {
         19,
@@ -27,28 +42,24 @@ extern void movePlayer(mob_t *princess, sfRenderWindow *window, struct keyLang_s
         62
     };
     if (sfKeyboard_isKeyPressed(keyLang.w)) {
-        printf("W %d\n", sfKeyW);
         princess->pos.y -= princess->speedMove;
         sfSprite_setPosition(princess->sprite, (sfVector2f){princess->pos.x, princess->pos.y});
         sfSprite_setTextureRect(princess->sprite, princess_upRect);
     }
     if (sfKeyboard_isKeyPressed(keyLang.a)) {
-        printf("A %d\n", sfKeyA);
         princess->pos.x -= princess->speedMove;
         sfSprite_setPosition(princess->sprite, (sfVector2f){princess->pos.x, princess->pos.y});
-        sfSprite_setTextureRect(princess->sprite, princess_leftRect);
+        princess_LeftWalk(princess, princess_leftRect, game->clock);
     }
     if (sfKeyboard_isKeyPressed(keyLang.s)) {
-        printf("S %d\n", sfKeyS);
         princess->pos.y += princess->speedMove;
         sfSprite_setPosition(princess->sprite, (sfVector2f){princess->pos.x, princess->pos.y});
         sfSprite_setTextureRect(princess->sprite, princess_downRect);
     }
     if (sfKeyboard_isKeyPressed(keyLang.d)) {
-        printf("D %d\n", sfKeyD);
         princess->pos.x += princess->speedMove;
         sfSprite_setPosition(princess->sprite, (sfVector2f){princess->pos.x, princess->pos.y});
         sfSprite_setTextureRect(princess->sprite, princess_rightRect);
     }
-    sfRenderWindow_drawSprite(window, princess->sprite, NULL);
+    sfRenderWindow_drawSprite(game->window, princess->sprite, NULL);
 }

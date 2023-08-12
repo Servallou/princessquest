@@ -10,7 +10,7 @@ CC	=	gcc
 SRC_MAIN	=	src/main.c	\
 				src/movePlayer.c	\
 
-NAME_MAIN	=	princessdev0.0.0
+NAME_MAIN	=	princessdev0.0.1
 
 CFLAGS = -Wall -Wextra -I./inc/ -I./lib/include -I./lib/my/external_files/inc
 

@@ -12,7 +12,7 @@
 typedef struct game_s {
     sfRenderWindow *window;
     sfMusic *music;
-
+    sfClock *clock;
 } game_t;
 
 struct keyLang_s {
@@ -22,6 +22,6 @@ struct keyLang_s {
     int d;
 };
 
-void movePlayer(mob_t *princess, sfRenderWindow *window, struct keyLang_s);
+void movePlayer(mob_t *princess, game_t *game, struct keyLang_s);
 
 #endif /* !MAIN_H_ */
