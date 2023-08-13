@@ -47,21 +47,6 @@ static void destroy_mob(mob_t *mob)
     mob->name = NULL;
 }
 
-static void active_sprite(sfSprite *sprite, sfClock *clock, sfIntRect *area)
-{
-    area->top = 346;
-    area->height = 64;
-    if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) > 0.10f) {
-        if (area->left == 471) {
-            area->left = 23;
-        } else {
-            area->left += 64;
-        }
-        sfSprite_setTextureRect(sprite, *area);
-        sfClock_restart(clock);
-    }
-}
-
 int main(void)
 {
     sfEvent event;
@@ -137,22 +122,22 @@ int main(void)
             break;
         }
         if (sfKeyboard_isKeyPressed(keyLang.a)) {
-            active_sprite(princess.sprite, game.clock, &princess_leftRect);
+            princess_leftWalk(princess.sprite, game.clock, &princess_leftRect);
             princess.pos.x -= princess.speedMove;
             sfSprite_setPosition(princess.sprite, (sfVector2f){princess.pos.x, princess.pos.y});
         }
         if (sfKeyboard_isKeyPressed(keyLang.d)) {
-            active_sprite(princess.sprite, game.clock, &princess_leftRect);
+            princess_rightWalk(princess.sprite, game.clock, &princess_rightRect);
             princess.pos.x += princess.speedMove;
             sfSprite_setPosition(princess.sprite, (sfVector2f){princess.pos.x, princess.pos.y});
         }
         if (sfKeyboard_isKeyPressed(keyLang.s)) {
-            active_sprite(princess.sprite, game.clock, &princess_leftRect);
+            princess_downWalk(princess.sprite, game.clock, &princess_downRect);
             princess.pos.y += princess.speedMove;
             sfSprite_setPosition(princess.sprite, (sfVector2f){princess.pos.x, princess.pos.y});
         }
         if (sfKeyboard_isKeyPressed(keyLang.w)) {
-            active_sprite(princess.sprite, game.clock, &princess_leftRect);
+            princess_upWalk(princess.sprite, game.clock, &princess_upRect);
             princess.pos.y -= princess.speedMove;
             sfSprite_setPosition(princess.sprite, (sfVector2f){princess.pos.x, princess.pos.y});
         }
