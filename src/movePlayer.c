@@ -98,7 +98,7 @@ extern void princess_upWalk(sfSprite *sprite, sfClock *clock, sfIntRect *area)
     area->top = 494;
     area->height = 63;
     if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) > 0.10f) {
-        if (area->left == (19 + (64 * 7))) {
+        if (area->left == 467) {
             area->left = 19;
         } else {
             area->left += 64;
@@ -109,7 +109,7 @@ extern void princess_upWalk(sfSprite *sprite, sfClock *clock, sfIntRect *area)
 }
 extern void princess_downWalk(sfSprite *sprite, sfClock *clock, sfIntRect *area)
 {
-    area->top = 569;
+    area->top = 568;
     area->height = 63;
     if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) > 0.10f) {
         if (area->left == (19 + (64 * 7))) {

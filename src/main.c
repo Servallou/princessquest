@@ -87,9 +87,9 @@ int main(void)
         "princess",
         1.0,
         sfMusic_createFromFile("./resources/audio/test.ogg"),
-        10.5,
+        8.5,
         PLAYER,
-        (sfVector2f){0, 0}
+        (sfVector2f){WIDTH / 2, HEIGHT / 2}
     };
     sfText_setFont(version, font);
     sfText_setFont(text, font);
@@ -100,6 +100,8 @@ int main(void)
     sfSprite_setScale(princess.sprite, (sfVector2f){5, 5});
     sfSprite_setTexture(princess.sprite, princess.texture, sfTrue);
     sfSprite_setTextureRect(princess.sprite, princess_downRect);
+    sfSprite_setPosition(princess.sprite, princess.pos);
+    sfSprite_setOrigin(princess.sprite, (sfVector2f){26 / 2, 62 / 2});
     init_game(&game);
     while (sfRenderWindow_isOpen(game.window)) {
         sfRenderWindow_setFramerateLimit(game.window, 60);
