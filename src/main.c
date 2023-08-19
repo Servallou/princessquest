@@ -93,7 +93,7 @@ int main(void)
     };
     sfText_setFont(version, font);
     sfText_setFont(text, font);
-    sfText_setString(version, "princessdev0.0.1");
+    sfText_setString(version, "princessdev0.0.2");
     sfText_setString(text, "En");
     sfText_setPosition(version, (sfVector2f){10, HEIGHT - 50});
     sfText_setPosition(text, (sfVector2f){10, 10});
@@ -156,56 +156,3 @@ int main(void)
     sfClock_destroy(game.clock);
 	return 0;
 }
-
-// #include "main.h"
-
-// extern void active_sprite(sfSprite *sprite, sfClock *clock, sfIntRect *area)
-// {
-//     // *i -= 0.1;
-//     // sfSprite_setPosition(sprite, (sfVector2f){*i, 1080 / 2});
-//     area->top = 346;
-//     area->height = 64;
-//     if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) > 0.10f) {
-//             if (area->left == 471) {
-//                 area->left = 23;
-//             } else {
-//                 area->left += 64;
-//             }
-//             sfSprite_setTextureRect(sprite, *area);
-//             sfClock_restart(clock);
-//     }
-// }
-
-// int main(void)
-// {
-//     sfRenderWindow *window = sfRenderWindow_create((sfVideoMode){1920, 1080, 32}, "Bjr", sfResize | sfClose, NULL);
-//     sfEvent event;
-//     float i = 1800;
-//     sfTexture *texture = sfTexture_createFromFile("resources/img/princess.png", NULL);
-//     sfSprite *sprite = sfSprite_create();
-//     sfSprite_setTexture(sprite, texture, sfTrue);
-//     sfIntRect area = {
-//         23,
-//         1,
-//         22,
-//         62
-//     };
-//     sfSprite_setTextureRect(sprite, area);
-//     sfSprite_setScale(sprite, (sfVector2f){5, 5});
-//     sfClock *clock = sfClock_create();
-//     sfSprite_setPosition(sprite, (sfVector2f){i, 1080 / 2});
-
-//     while(sfRenderWindow_isOpen(window)) {
-//         while (sfRenderWindow_pollEvent(window, &event)) {
-//             if (event.type == sfEvtClosed) {
-//                 sfRenderWindow_close(window);
-//             }
-//         }
-//         if (sfKeyboard_isKeyPressed(sfKeyQ)) {
-//             active_sprite(sprite, clock, &area, &i);
-//         }
-//         sfRenderWindow_clear(window, sfBlack);
-//         sfRenderWindow_drawSprite(window, sprite, NULL);
-//         sfRenderWindow_display(window);
-//     }
-// }
