@@ -1,6 +1,6 @@
 #include "main.h"
 
-extern void inventory(sfEvent *event)
+extern void inventory(game_t *game)
 {
-    sf
+    
 }
