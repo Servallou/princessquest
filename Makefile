@@ -9,6 +9,8 @@ CC	=	gcc
 
 SRC_MAIN	=	src/main.c	\
 				src/player/move.c	\
+				src/player/inv.c	\
+				lib/modifyRectangle.c	\
 
 NAME_MAIN	=	princessdev0.0.2
 

@@ -22,7 +22,7 @@ static struct keyLang_s changeLay(char lang)
     return tmp;
 }
 
-static void init_game(game_t *game)
+static void initGame(game_t *game)
 {
     sfVideoMode mode = {WIDTH, HEIGHT, 32};
 
@@ -31,6 +31,27 @@ static void init_game(game_t *game)
     game->clock = sfClock_create();
     sfMusic_play(game->music);
     sfMusic_setLoop(game->music, 1);
+}
+
+static void initInventory(inv_t *inventory)
+{
+    inventory->innerBox_1 = sfRectangleShape_create();
+    inventory->innerBox_2 = sfRectangleShape_create();
+    inventory->innerBox_3 = sfRectangleShape_create();
+    inventory->innerBox_4 = sfRectangleShape_create();
+    inventory->outerBox = sfRectangleShape_create();
+    inventory->isOpen = NO;
+    sfRectangleShape_setOutlineColor(inventory->outerBox, (sfColor){255, 255, 255, 0});
+    sfRectangleShape_setFillColor(inventory->outerBox, (sfColor){255, 255, 255, 0});
+    sfRectangleShape_setOutlineThickness(inventory->outerBox, 1.0);
+    sfRectangleShape_setOrigin(inventory->outerBox, (sfVector2f){WIDTH / 2, HEIGHT / 2});
+    sfRectangleShape_setScale(inventory->outerBox, (sfVector2f){2, 4});
+    printf("init_inventory : check\n");
+}
+
+static void drawInventory(sfRenderWindow *window, inv_t *inventory)
+{
+    sfRenderWindow_drawRectangleShape(window, inventory->outerBox, NULL);
 }
 
 static void destroy_game(game_t *game)
@@ -49,8 +70,8 @@ static void destroy_mob(mob_t *mob)
 
 int main(void)
 {
-    sfEvent event;
     game_t game;
+    inv_t inventory;
     struct keyLang_s keyLang;
     char lang = 'e';
     sfFont *font = sfFont_createFromFile("./resources/font/arial.ttf");
@@ -102,12 +123,13 @@ int main(void)
     sfSprite_setTextureRect(princess.sprite, princess_downRect);
     sfSprite_setPosition(princess.sprite, princess.pos);
     sfSprite_setOrigin(princess.sprite, (sfVector2f){26 / 2, 62 / 2});
-    init_game(&game);
+    initGame(&game);
+    initInventory(&inventory);
     while (sfRenderWindow_isOpen(game.window)) {
         sfRenderWindow_setFramerateLimit(game.window, 60);
         sfRenderWindow_clear(game.window, sfBlack);
-        while (sfRenderWindow_pollEvent(game.window, &event)) {
-            if (event.type == sfEvtClosed) {
+        while (sfRenderWindow_pollEvent(game.window, &game.event)) {
+            if (game.event.type == sfEvtClosed) {
                 sfRenderWindow_close(game.window);
             }
         }
@@ -123,6 +145,7 @@ int main(void)
         if (sfKeyboard_isKeyPressed(sfKeyEscape)) {
             break;
         }
+        getInventory(&inventory);
         if (sfKeyboard_isKeyPressed(keyLang.a)) {
             princess_leftWalk(princess.sprite, game.clock, &princess_leftRect);
             princess.pos.x -= princess.speedMove;
@@ -146,6 +169,7 @@ int main(void)
         sfRenderWindow_drawText(game.window, text, NULL);
         sfRenderWindow_drawText(game.window, version, NULL);
         sfRenderWindow_drawSprite(game.window, princess.sprite, NULL);
+        drawInventory(game.window, &inventory);
         sfRenderWindow_display(game.window);
     }
     destroy_game(&game);

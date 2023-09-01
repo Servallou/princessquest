@@ -1,10 +1,10 @@
 #ifndef MAIN_H_
     #define MAIN_H_
 
-    #include <SFML/Graphics.h>
-    #include <SFML/Audio.h>
+    #include "setup.h"
     #include <stdio.h>
     #include "mob.h"
+    #include "inv.h"
 
     #define WIDTH 1920
     #define HEIGHT 1080
@@ -13,6 +13,7 @@ typedef struct game_s {
     sfRenderWindow *window;
     sfMusic *music;
     sfClock *clock;
+    sfEvent event;
 } game_t;
 
 struct keyLang_s {
