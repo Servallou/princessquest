@@ -44,9 +44,9 @@ static void initInventory(inv_t *inventory)
     sfRectangleShape_setOutlineColor(inventory->outerBox, (sfColor){255, 255, 255, 0});
     sfRectangleShape_setFillColor(inventory->outerBox, (sfColor){255, 255, 255, 0});
     sfRectangleShape_setOutlineThickness(inventory->outerBox, 1.0);
-    sfRectangleShape_setOrigin(inventory->outerBox, (sfVector2f){WIDTH / 2, HEIGHT / 2});
-    sfRectangleShape_setScale(inventory->outerBox, (sfVector2f){2, 4});
-    printf("init_inventory : check\n");
+    sfRectangleShape_setPosition(inventory->outerBox, (sfVector2f){10, 10});
+    sfRectangleShape_setSize(inventory->outerBox, (sfVector2f){1, 1});
+    sfRectangleShape_setScale(inventory->outerBox, (sfVector2f){500, 200});
 }
 
 static void drawInventory(sfRenderWindow *window, inv_t *inventory)
@@ -145,7 +145,6 @@ int main(void)
         if (sfKeyboard_isKeyPressed(sfKeyEscape)) {
             break;
         }
-        getInventory(&inventory);
         if (sfKeyboard_isKeyPressed(keyLang.a)) {
             princess_leftWalk(princess.sprite, game.clock, &princess_leftRect);
             princess.pos.x -= princess.speedMove;
@@ -168,9 +167,10 @@ int main(void)
         }
         sfRenderWindow_drawText(game.window, text, NULL);
         sfRenderWindow_drawText(game.window, version, NULL);
-        sfRenderWindow_drawSprite(game.window, princess.sprite, NULL);
         drawInventory(game.window, &inventory);
+        sfRenderWindow_drawSprite(game.window, princess.sprite, NULL);
         sfRenderWindow_display(game.window);
+        getInventory(&game.event, &inventory);
     }
     destroy_game(&game);
     destroy_mob(&princess);

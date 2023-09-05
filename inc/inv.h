@@ -17,6 +17,6 @@ typedef struct inv_s {
     sfTexture *innerBox;
 } inv_t;
 
-void getInventory(inv_t *inventory);
+void getInventory(sfEvent *event, inv_t *inventory);
 
 #endif /* !INV_H_ */
