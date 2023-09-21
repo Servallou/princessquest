@@ -35,6 +35,7 @@ static void initGame(game_t *game)
 
 static void drawInventory(sfRenderWindow *window, inv_t *inventory)
 {
+    sfRenderWindow_drawRectangleShape(window, inventory->background, NULL);
     sfRenderWindow_drawRectangleShape(window, inventory->outerBox, NULL);
 }
 

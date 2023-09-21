@@ -5,12 +5,12 @@
 
 static void openInventory(inv_t *inventory)
 {
-    rect_ModifyAllOpacity(inventory->outerBox, 255);
+    rect_ModifyAllOpacity(inventory, 255);
 }
 
 static void closeInventory(inv_t *inventory)
 {
-    rect_ModifyAllOpacity(inventory->outerBox, 0);
+    rect_ModifyAllOpacity(inventory, 0);
 }
 
 extern void getInventory(sfBool *previousKeyState, inv_t *inventory)
