@@ -9,6 +9,7 @@ typedef struct inv_s {
         YES
     } isOpen;
     sfRectangleShape *outerBox;
+    sfRectangleShape *background;
     sfTexture *outerBox_texture;
     sfTexture *innerBox;
 } inv_t;

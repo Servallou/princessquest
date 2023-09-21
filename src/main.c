@@ -100,7 +100,7 @@ int main(void)
     sfText_setFont(version, font);
     sfText_setFont(text, font);
     sfText_setString(version, "princessdev0.0.2_1");
-    sfText_setString(text, "En");
+    sfText_setString(text, "Fr");
     sfText_setPosition(version, (sfVector2f){10, HEIGHT - 50});
     sfText_setPosition(text, (sfVector2f){10, 10});
     sfSprite_setScale(princess.sprite, (sfVector2f){5, 5});

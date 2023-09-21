@@ -17,17 +17,17 @@ extern void getInventory(sfBool *previousKeyState, inv_t *inventory)
 {
     sfBool keyState = sfKeyboard_isKeyPressed(sfKeyE);
 
-    if ((!*previousKeyState) && (keyState)) {
-        if (inventory->isOpen == NO) {
+    // if ((*previousKeyState == sfFalse) && (keyState == sfTrue)) {
+        if (inventory->isOpen == NO && sfKeyboard_isKeyPressed(sfKeyE)) {
             openInventory(inventory);
             inventory->isOpen = YES;
             return;
         }
-        if (inventory->isOpen == YES) {
+        if (inventory->isOpen == YES && sfKeyboard_isKeyPressed(sfKeyR)) {
             closeInventory(inventory);
             inventory->isOpen = NO;
             return;
         }
-    }
-    *previousKeyState = keyState;
+    // }
+    // *previousKeyState = keyState;
 }
