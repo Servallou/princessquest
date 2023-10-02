@@ -6,6 +6,8 @@
     #include "mob.h"
     #include "inv.h"
     #include "game.h"
+    #include "util.h"
+    #include "item.h"
 
 void movePlayer(mob_t *princess, game_t *game, struct keyLang_s);
 

@@ -11,10 +11,12 @@ SRC_MAIN	=	src/main.c	\
 				src/player/move.c	\
 				src/player/inventory/toggleInventory.c	\
 				src/player/inventory/initInventory.c	\
+				src/util/version.c	\
+				src/world/item.c	\
 				lib/modifyRectangle.c	\
 				lib/input/isKeyRelease.c	\
 
-NAME_MAIN	=	princessdev0.0.2_1
+NAME_MAIN	=	princessdev0.0.2_2
 
 CFLAGS = -Wall -Wextra -I./inc/ -I./lib/include -I./lib/my/external_files/inc
 

@@ -37,6 +37,8 @@ static void drawInventory(sfRenderWindow *window, inv_t *inventory)
 {
     sfRenderWindow_drawRectangleShape(window, inventory->background, NULL);
     sfRenderWindow_drawRectangleShape(window, inventory->outerBox, NULL);
+    // if (inventory->itemSprite[0] != NULL)
+    //     sfRenderWindow_drawRectangleShape(window, inventory->itemSprite[0], NULL);
 }
 
 static void destroy_game(game_t *game)
@@ -53,6 +55,14 @@ static void destroy_mob(mob_t *mob)
     mob->name = NULL;
 }
 
+static void transferItemToInv(sfRectangleShape *itemToTransfer, inv_t *inv)
+{
+    printf("test\n");
+    inv->itemSprite[0] = sfRectangleShape_copy(itemToTransfer);
+    sfRectangleShape_setPosition(inv->itemSprite[0], (sfVector2f){0, 0});
+    sfRectangleShape_setFillColor(inv->itemSprite[0], (sfColor){255, 255, 0, 0});
+}
+
 int main(void)
 {
     game_t game;
@@ -60,9 +70,10 @@ int main(void)
     struct keyLang_s keyLang;
     char lang = 'f';
     sfBool previousKeyState = sfFalse;
+    item_t itemBlock = block();
     sfFont *font = sfFont_createFromFile("./resources/font/arial.ttf");
     sfText *text = sfText_create();
-    sfText *version = sfText_create();
+    sfText *version = actualVersion("princessdev0.0.2_2", font);
     sfIntRect princess_downRect = {
         19,
         223,
@@ -98,11 +109,8 @@ int main(void)
         PLAYER,
         (sfVector2f){WIDTH / 2, HEIGHT / 2}
     };
-    sfText_setFont(version, font);
     sfText_setFont(text, font);
-    sfText_setString(version, "princessdev0.0.2_1");
     sfText_setString(text, "Fr");
-    sfText_setPosition(version, (sfVector2f){10, HEIGHT - 50});
     sfText_setPosition(text, (sfVector2f){10, 10});
     sfSprite_setScale(princess.sprite, (sfVector2f){5, 5});
     sfSprite_setTexture(princess.sprite, princess.texture, sfTrue);
@@ -132,6 +140,10 @@ int main(void)
         if (sfKeyboard_isKeyPressed(sfKeyEscape)) {
             break;
         }
+        if (sfKeyboard_isKeyPressed(sfKeyF)) {
+            transferItemToInv(itemBlock.shape, &inventory);
+            itemBlock.shape = NULL;
+        }
         if (sfKeyboard_isKeyPressed(keyLang.a)) {
             princess_leftWalk(princess.sprite, game.clock, &princess_leftRect);
             princess.pos.x -= princess.speedMove;
@@ -154,8 +166,10 @@ int main(void)
         }
         sfRenderWindow_drawText(game.window, text, NULL);
         sfRenderWindow_drawText(game.window, version, NULL);
-        sfRenderWindow_drawSprite(game.window, princess.sprite, NULL);
+        if (itemBlock.shape != NULL)
+            sfRenderWindow_drawRectangleShape(game.window, itemBlock.shape, NULL);
         drawInventory(game.window, &inventory);
+        sfRenderWindow_drawSprite(game.window, princess.sprite, NULL);
         sfRenderWindow_display(game.window);
     }
     destroy_game(&game);

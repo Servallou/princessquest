@@ -4,7 +4,7 @@
     #include <SFML/Graphics.h>
     #include <SFML/Audio.h>
 
-enum ID
+enum MOB_ID
 {
     PLAYER,
     ENNEMY,
@@ -22,6 +22,11 @@ typedef struct mob_s {
     int id;
     sfVector2f pos;
 } mob_t;
+
+typedef struct mobEvt_s {
+    int id;
+    sfBool (*interact)(void);
+} mobEvt_t;
 
 void princess_leftWalk(sfSprite *sprite, sfClock *clock, sfIntRect *area);
 

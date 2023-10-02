@@ -2,6 +2,8 @@
     #define INV_H_
 
     #include "setup.h"
+    #include "item.h"
+
 
 typedef struct inv_s {
     enum _isOpen {
@@ -12,6 +14,8 @@ typedef struct inv_s {
     sfRectangleShape *background;
     sfTexture *outerBox_texture;
     sfTexture *innerBox;
+    sfRectangleShape *itemSprite[5];
+    item_t slots[5];
 } inv_t;
 
 void getInventory(sfBool *previousKeyState, inv_t *inventory);
