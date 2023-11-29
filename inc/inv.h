@@ -7,8 +7,8 @@
 
 typedef struct inv_s {
     enum _isOpen {
-        NO,
-        YES
+        NO = -1,
+        YES = 1
     } isOpen;
     sfRectangleShape *outerBox;
     sfRectangleShape *background;
@@ -18,7 +18,7 @@ typedef struct inv_s {
     item_t slots[5];
 } inv_t;
 
-void getInventory(sfBool *previousKeyState, inv_t *inventory);
+void getInventory(inv_t *inventory);
 
 void initInventory(inv_t *inventory);
 

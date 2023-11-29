@@ -13,21 +13,14 @@ static void closeInventory(inv_t *inventory)
     rect_ModifyAllOpacity(inventory, 0);
 }
 
-extern void getInventory(sfBool *previousKeyState, inv_t *inventory)
+extern void getInventory(inv_t *inventory)
 {
-    sfBool keyState = sfKeyboard_isKeyPressed(sfKeyE);
-
-    // if ((*previousKeyState == sfFalse) && (keyState == sfTrue)) {
-        if (inventory->isOpen == NO && sfKeyboard_isKeyPressed(sfKeyE)) {
-            openInventory(inventory);
-            inventory->isOpen = YES;
-            return;
-        }
-        if (inventory->isOpen == YES && sfKeyboard_isKeyPressed(sfKeyR)) {
-            closeInventory(inventory);
-            inventory->isOpen = NO;
-            return;
-        }
-    // }
-    // *previousKeyState = keyState;
+    if (inventory->isOpen == YES) {
+        openInventory(inventory);
+        return;
+    }
+    if (inventory->isOpen == NO) {
+        closeInventory(inventory);
+        return;
+    }
 }

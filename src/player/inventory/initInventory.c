@@ -1,4 +1,5 @@
 #include "inv.h"
+#include <stdio.h>
 
 static void initOuterBox(sfRectangleShape *shape)
 {
@@ -30,4 +31,5 @@ extern void initInventory(inv_t *inventory)
     inventory->isOpen = NO;
     initOuterBox(inventory->outerBox);
     initBackground(inventory->background);
+    printf("inv init\n");
 }

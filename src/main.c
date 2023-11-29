@@ -123,6 +123,13 @@ int main(void)
         sfRenderWindow_setFramerateLimit(game.window, TICK * 600);
         sfRenderWindow_clear(game.window, sfBlack);
         while (sfRenderWindow_pollEvent(game.window, &game.event)) {
+            if (game.event.key.code == 'e') {
+                if (inventory.isOpen == NO) {
+                    inventory.isOpen = YES;
+                } else {
+                    inventory.isOpen = NO;
+                }
+            }
             if (game.event.type == sfEvtClosed) {
                 sfRenderWindow_close(game.window);
             }
@@ -135,15 +142,17 @@ int main(void)
             lang = 'e';
             sfText_setString(text, "En");
         }
+        printf("%d\n", inventory.isOpen);
+        getInventory(&inventory);
+        drawInventory(game.window, &inventory);
         keyLang = changeLay(lang);
-        getInventory(&previousKeyState, &inventory);
         if (sfKeyboard_isKeyPressed(sfKeyEscape)) {
             break;
         }
-        if (sfKeyboard_isKeyPressed(sfKeyF)) {
-            transferItemToInv(itemBlock.shape, &inventory);
-            itemBlock.shape = NULL;
-        }
+        // if (sfKeyboard_isKeyPressed(sfKeyF)) {
+        //     transferItemToInv(itemBlock.shape, &inventory);
+        //     itemBlock.shape = NULL;
+        // }
         if (sfKeyboard_isKeyPressed(keyLang.a)) {
             princess_leftWalk(princess.sprite, game.clock, &princess_leftRect);
             princess.pos.x -= princess.speedMove;
@@ -166,9 +175,8 @@ int main(void)
         }
         sfRenderWindow_drawText(game.window, text, NULL);
         sfRenderWindow_drawText(game.window, version, NULL);
-        if (itemBlock.shape != NULL)
-            sfRenderWindow_drawRectangleShape(game.window, itemBlock.shape, NULL);
-        drawInventory(game.window, &inventory);
+        // if (itemBlock.shape != NULL)
+        //     sfRenderWindow_drawRectangleShape(game.window, itemBlock.shape, NULL);
         sfRenderWindow_drawSprite(game.window, princess.sprite, NULL);
         sfRenderWindow_display(game.window);
     }
